@@ -10,7 +10,7 @@ function App() {
     dispatch(loadData());
   }, [dispatch]);
 
-  return <div className="App">HHHHHHHHHHHssHHHHHH</div>;
+  return <div className="App">Main page</div>;
 }
 
 export default App;
