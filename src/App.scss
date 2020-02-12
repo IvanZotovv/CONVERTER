@@ -1,4 +1,23 @@
 .App {
   text-align: center;
-  color: red;
+}
+.navigation-block {
+  background-color: royalblue;
+}
+.navigation-list {
+  display: flex;
+  padding: 0;
+  height: 60px;
+  margin: 0 60px 0;
+  .navigation-item {
+    margin: 20px;
+    list-style: none;
+    text-decoration: none;
+  }
+  .navigation-item a {
+    color: white;
+    &:hover {
+      color: wheat;
+    }
+  }
 }

@@ -1,0 +1,29 @@
+.table {
+  width: 90%;
+  margin: auto;
+}
+
+.table-block {
+  display: flex;
+  flex-direction: column;
+}
+.table-block-info {
+  display: flex;
+  justify-content: space-between;
+}
+.table-block-main-list {
+  width: 59%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.table-block-elected-list {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.ant-table-wrapper {
+  width: -webkit-fill-available;
+}

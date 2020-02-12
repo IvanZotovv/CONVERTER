@@ -1,16 +1,27 @@
-import { GET_DATA } from './actyonType';
+import { GET_DATA, ELECTED_ITEM } from './actyonType';
 
 const initialState = {
-  data: {}
+  data: {},
+  elected: []
 };
 
 export const reducer = (state = initialState, action) => {
   console.log(action.payload);
-  if (action.type === GET_DATA) {
-    return {
-      ...state,
-      data: action.payload
-    };
+  switch (action.type) {
+    case GET_DATA: {
+      return {
+        ...state,
+        data: action.payload
+      };
+    }
+    case ELECTED_ITEM: {
+      return {
+        ...state,
+        elected: state.elected.concat(action.payload)
+      };
+    }
+    default:
+      break;
   }
 
   return state;
