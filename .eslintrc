@@ -1,0 +1,13 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "eslint linebreak-style": [0, "error", "windows"],
+    "comma-dangle": ["error", "never"],
+    "import/prefer-default-export": "off"
+  },
+  "globals": {
+    "document": false,
+    "window": false
+  }
+}
