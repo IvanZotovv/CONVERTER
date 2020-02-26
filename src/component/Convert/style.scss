@@ -1,0 +1,66 @@
+.converter {
+  width: 90%;
+  margin: auto;
+}
+
+.converter-block {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  position: relative;
+}
+.converter-block-head {
+  display: flex;
+  justify-content: space-between;
+}
+.converter-block-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.converter-info {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+}
+.converter-info-left,
+.converter-info-right {
+  display: flex;
+  width: 400px;
+  margin: 40px 0;
+}
+.converter-info-to {
+  margin-left: 5px;
+}
+
+.converter-from {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+.converter-from-valute-list {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  display: flex;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+.converter-from-valute-item {
+  list-style: none;
+  padding: 5px 28px;
+  border-right: 1px solid gray;
+  &:hover {
+    background-color: yellowgreen;
+  }
+}
+.converter-from-valute-item:last-child {
+  border-right: none;
+}
+.ant-input {
+  height: 100px;
+  font-size: 30px;
+  width: 400px;
+}

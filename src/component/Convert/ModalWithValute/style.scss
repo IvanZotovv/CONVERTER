@@ -1,0 +1,24 @@
+.modal {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100vh;
+  height: 80vh;
+  z-index: 1;
+  background: white; /* Цвет фона */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+
+.modal-list {
+  padding: 0;
+  margin: 8px 30px;
+}
+
+.ant-table-tbody > tr > td {
+  padding: 6px 16px;
+}
+.ant-table-thead {
+  display: none;
+}
