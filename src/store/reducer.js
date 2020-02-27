@@ -5,26 +5,14 @@ import {
   SELECT_FROM_RIGHT_ITEM
 } from './actyonType';
 
+import { rubles } from '../component/Convert/utils';
+
 const initialState = {
   data: {},
   elected: [],
   selectItem: {
-    leftBlock: [
-      {
-        CharCode: 'RUR',
-        Nominal: 100,
-        Name: 'Рубли',
-        Value: 1
-      }
-    ],
-    rightBlock: [
-      {
-        CharCode: 'RUR',
-        Nominal: 100,
-        Name: 'Рубли',
-        Value: 1
-      }
-    ]
+    leftBlock: rubles,
+    rightBlock: rubles
   }
 };
 

@@ -29,7 +29,7 @@ export const chooseObj = (side, event, left, right) =>
   [side].includes('left')
     ? {
         leftInput: event.target.value,
-        rightInput: event.target.value / getExchengeMultiply(left, right)
+        rightInput: event.target.value * getExchengeDevide(left, right)
       }
     : {
         leftInput: event.target.value * getExchengeMultiply(left, right),
