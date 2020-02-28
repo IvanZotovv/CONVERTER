@@ -64,8 +64,8 @@ export default function Index() {
           </div>
           <div className="converter-info-right">
             <p className="converter-info-right-from">
-              1&nbsp;{right !== undefined ? charCodeValue(right) : 'RUR'}{' '}
-              =&nbsp;
+              1&nbsp;
+              {right !== undefined ? charCodeValue(right) : 'RUR'} =&nbsp;
             </p>
             <p className="converter-info-right-to">
               {getExchengeMultiply(left, right)}
