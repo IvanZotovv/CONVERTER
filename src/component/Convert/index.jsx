@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './style.scss';
 import { useDispatch } from 'react-redux';
 import { Input } from 'antd';
@@ -16,11 +16,28 @@ export default function Index() {
   const dispatch = useDispatch();
   const { left, right } = useContext(Context);
   const [inputVal, setInputVal] = useState({
-    leftInput: null,
-    rightInput: null
+    leftInput: '',
+    rightInput: ''
   });
 
   const { leftInput, rightInput } = inputVal;
+
+  const leftV = left[0].Value;
+  const rightV = right[0].Value;
+
+  useEffect(() => {
+    setInputVal({
+      leftInput: inputVal.leftInput,
+      rightInput: inputVal.rightInput * leftV
+    });
+  }, [left]);
+
+  useEffect(() => {
+    setInputVal({
+      leftInput: inputVal.leftInput,
+      rightInput: inputVal.rightInput * rightV
+    });
+  }, [right]);
 
   const getValueFromInput = side => event =>
     setInputVal(chooseObj(side, event, left, right));
@@ -32,8 +49,14 @@ export default function Index() {
       <h2>Конвертация валют</h2>
       <div className="converter-block">
         <div className="converter-block-head">
-          <ValuteInput onChange={onChange('left')} />
-          <ValuteInput onChange={onChange('right')} />
+          <ValuteInput
+            onChange={onChange('left')}
+            // handleChange={handleChange}
+          />
+          <ValuteInput
+            onChange={onChange('right')}
+            // handleChange={handleChange}
+          />
         </div>
         <div className="converter-block-input">
           <Input
