@@ -1,14 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Table, Button } from 'antd';
-import { Context } from '../../store/context';
+import { createStructuredSelector } from 'reselect';
 import { electedItem } from '../../store/actions';
 import { columsInfo } from './constants';
+import { newGetData, newGetElectedItem } from '../../store/selectors';
 import './style.scss';
 
-function Index({ elected }) {
-  const { list } = useContext(Context);
+function Index({ newGetData, newGetElectedItem }) {
   const dispatch = useDispatch();
+
+  const list = Object.values({ ...newGetData.Valute });
 
   const getValue = item => dispatch(electedItem(item));
 
@@ -66,7 +68,7 @@ function Index({ elected }) {
             <Table
               columns={columsInfo}
               pagination={false}
-              dataSource={[...new Set(elected)]}
+              dataSource={[...new Set(newGetElectedItem)]}
               rowKey={record => record.ID}
             />
           </div>
@@ -76,8 +78,9 @@ function Index({ elected }) {
   );
 }
 
-const mapStateToProps = state => ({
-  elected: state.elected
+const mapStateToProps = createStructuredSelector({
+  newGetData,
+  newGetElectedItem
 });
 
-export default connect(mapStateToProps)(Index);
+export default connect(mapStateToProps)(React.memo(Index));

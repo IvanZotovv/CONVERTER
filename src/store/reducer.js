@@ -14,6 +14,7 @@ const initialState = {
         CharCode: 'RUR',
         Nominal: 100,
         Name: 'Рубли',
+        ID: '1',
         Value: 1
       }
     ],
@@ -22,6 +23,7 @@ const initialState = {
         CharCode: 'RUR',
         Nominal: 100,
         Name: 'Рубли',
+        ID: '1',
         Value: 1
       }
     ]

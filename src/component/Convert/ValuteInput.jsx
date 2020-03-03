@@ -1,21 +1,31 @@
-import React, { useRef, useState, useContext } from 'react';
-
+import React, { useRef, useState } from 'react';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 import useOutsideClick from '../useOutsideClick';
 import Modal from './ModalWithValute/Modal';
 import { getItem } from './utils';
-import { Context } from '../../store/context';
+import { newGetData } from '../../store/selectors';
 
-export default function Index({ onChange }) {
+function Index({ onChange, newGetData }) {
   const ref = useRef();
   const [modalWindow, setModalWindow] = useState(false);
-  const { list } = useContext(Context);
+  const [valut, setValute] = useState('HUF');
+  const list = Object.values({ ...newGetData.Valute });
 
-  useOutsideClick(ref, () => {
-    if (modalWindow) setModalWindow(false);
-  });
+  useOutsideClick(ref, () => modalWindow && setModalWindow(false));
+
+  const handleChange = ({ target }) =>
+    ['RUR', 'USD', 'EUR'].includes(target.textContent)
+      ? setValute('HUF')
+      : valut;
+
+  const getVal = el => {
+    setModalWindow(false);
+    return setValute(el.CharCode);
+  };
 
   const insertModalWithValute = modalWindow ? (
-    <Modal onChange={onChange} />
+    <Modal onChange={onChange} getVal={getVal} />
   ) : null;
 
   return (
@@ -24,13 +34,21 @@ export default function Index({ onChange }) {
         className="converter-from-valute-list"
         onClick={event => onChange(getItem(event.target.textContent, list))}
       >
-        <li className="converter-from-valute-item">RUR</li>
-        <li className="converter-from-valute-item">USD</li>
-        <li className="converter-from-valute-item">EUR</li>
-        <li className="converter-from-valute-item">HUF</li>
+        <li className="converter-from-valute-item" onClick={handleChange}>
+          RUR
+        </li>
+        <li className="converter-from-valute-item" onClick={handleChange}>
+          USD
+        </li>
+        <li className="converter-from-valute-item" onClick={handleChange}>
+          EUR
+        </li>
+        <li className="converter-from-valute-item" onClick={handleChange}>
+          {valut}
+        </li>
         <li
           className="converter-from-valute-item"
-          onClick={() => setModalWindow(!modalWindow)}
+          onClick={() => setModalWindow(true)}
         >
           ▼
         </li>
@@ -39,3 +57,9 @@ export default function Index({ onChange }) {
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  newGetData
+});
+
+export default connect(mapStateToProps)(Index);

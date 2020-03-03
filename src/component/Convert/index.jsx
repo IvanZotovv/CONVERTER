@@ -1,9 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import './style.scss';
-import { useDispatch } from 'react-redux';
 import { Input } from 'antd';
+import { createStructuredSelector } from 'reselect';
+import { left, right } from '../../store/selectors';
 import ValuteInput from './ValuteInput';
-import { Context } from '../../store/context';
 import {
   charCodeValue,
   selectVal,
@@ -12,30 +13,29 @@ import {
   chooseObj
 } from './utils';
 
-export default function Index() {
+function Index(props) {
   const dispatch = useDispatch();
-  const { left, right } = useContext(Context);
+  const { left, right } = props;
   const [inputVal, setInputVal] = useState({
     leftInput: '',
     rightInput: ''
   });
 
-  const { leftInput, rightInput } = inputVal;
+  console.log(left, right);
 
-  const leftV = left[0].Value;
-  const rightV = right[0].Value;
+  const { leftInput, rightInput } = inputVal;
 
   useEffect(() => {
     setInputVal({
       leftInput: inputVal.leftInput,
-      rightInput: inputVal.rightInput * leftV
+      rightInput: inputVal.rightInput * left[0].Value
     });
   }, [left]);
 
   useEffect(() => {
     setInputVal({
       leftInput: inputVal.leftInput,
-      rightInput: inputVal.rightInput * rightV
+      rightInput: inputVal.rightInput * right[0].Value
     });
   }, [right]);
 
@@ -49,14 +49,8 @@ export default function Index() {
       <h2>Конвертация валют</h2>
       <div className="converter-block">
         <div className="converter-block-head">
-          <ValuteInput
-            onChange={onChange('left')}
-            // handleChange={handleChange}
-          />
-          <ValuteInput
-            onChange={onChange('right')}
-            // handleChange={handleChange}
-          />
+          <ValuteInput onChange={onChange('left')} />
+          <ValuteInput onChange={onChange('right')} />
         </div>
         <div className="converter-block-input">
           <Input
@@ -101,3 +95,10 @@ export default function Index() {
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  left,
+  right
+});
+
+export default connect(mapStateToProps)(React.memo(Index));

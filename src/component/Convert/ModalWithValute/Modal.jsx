@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-// import { useDispatch } from 'react-redux';
+import React from 'react';
 import { Table } from 'antd';
-import { Context } from '../../../store/context';
-// import { selectRightValute } from '../../../store/actions';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { newGetData } from '../../../store/selectors';
 
 import './style.scss';
 
@@ -25,8 +25,10 @@ const columns = [
   }
 ];
 
-export default function Index({ onChange }) {
-  const { list } = useContext(Context);
+function Index({ newGetData, onChange, getVal }) {
+  const list = Object.values({ ...newGetData.Valute });
+
+  console.log(list);
 
   return (
     <div className="modal">
@@ -34,7 +36,9 @@ export default function Index({ onChange }) {
         <Table
           columns={columns}
           onRow={el => ({
-            onClick: () => onChange(el)
+            onClick: () => {
+              return onChange(el), getVal(el);
+            }
           })}
           pagination={false}
           dataSource={list}
@@ -44,3 +48,9 @@ export default function Index({ onChange }) {
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  newGetData
+});
+
+export default connect(mapStateToProps)(React.memo(Index));

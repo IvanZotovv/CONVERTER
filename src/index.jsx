@@ -4,15 +4,21 @@ import 'antd/dist/antd.css';
 import './index.css';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { reducer } from './store/reducer';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import watchLoadData from './store/sagas';
 
+const rootReducer = combineReducers({ reducer });
+
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
+);
 
 sagaMiddleware.run(watchLoadData);
 
