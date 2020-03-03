@@ -28,8 +28,6 @@ const columns = [
 function Index({ newGetData, onChange, getVal }) {
   const list = Object.values({ ...newGetData.Valute });
 
-  console.log(list);
-
   return (
     <div className="modal">
       <ul className="modal-list">

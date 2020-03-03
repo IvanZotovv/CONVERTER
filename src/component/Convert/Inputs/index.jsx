@@ -3,15 +3,17 @@ import { connect, useDispatch } from 'react-redux';
 import './style.scss';
 import { Input } from 'antd';
 import { createStructuredSelector } from 'reselect';
-import { left, right } from '../../store/selectors';
+import { left, right } from '../../../store/selectors';
 import ValuteInput from './ValuteInput';
 import {
   charCodeValue,
   selectVal,
   getExchengeDevide,
   getExchengeMultiply,
-  chooseObj
-} from './utils';
+  chooseObj,
+  leftVal,
+  rightVal
+} from '../utils';
 
 function Index(props) {
   const dispatch = useDispatch();
@@ -21,21 +23,19 @@ function Index(props) {
     rightInput: ''
   });
 
-  console.log(left, right);
-
   const { leftInput, rightInput } = inputVal;
 
   useEffect(() => {
     setInputVal({
       leftInput: inputVal.leftInput,
-      rightInput: inputVal.rightInput * left[0].Value
+      rightInput: inputVal.rightInput * leftVal(left)
     });
   }, [left]);
 
   useEffect(() => {
     setInputVal({
       leftInput: inputVal.leftInput,
-      rightInput: inputVal.rightInput * right[0].Value
+      rightInput: inputVal.leftInput * leftVal(right)
     });
   }, [right]);
 

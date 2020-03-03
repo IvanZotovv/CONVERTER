@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Home from './component/Home';
-import Convert from './component/Convert';
+import Convert from './component/Convert/Inputs';
 import { loadData } from './store/actions';
 import './App.scss';
 
