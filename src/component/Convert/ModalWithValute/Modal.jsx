@@ -14,13 +14,20 @@ const columns = [
   },
   {
     title: 'Страна',
-    dataIndex: 'CharCode',
+    dataIndex: 'Name',
     key: 'Name',
     width: '40%'
   },
+
+  {
+    title: 'Номинал',
+    dataIndex: 'Nominal',
+    key: 'Nominal'
+  },
+
   {
     title: 'Курс',
-    dataIndex: 'CharCode',
+    dataIndex: 'Value',
     key: 'Value'
   }
 ];
@@ -30,19 +37,18 @@ function Index({ newGetData, onChange, getVal }) {
 
   return (
     <div className="modal">
-      <ul className="modal-list">
-        <Table
-          columns={columns}
-          onRow={el => ({
-            onClick: () => {
-              return onChange(el), getVal(el);
-            }
-          })}
-          pagination={false}
-          dataSource={list}
-          rowKey={record => record.ID}
-        />
-      </ul>
+      <Table
+        onRow={record => ({
+          onClick: () => {
+            return onChange(record), getVal(record);
+          }
+        })}
+        columns={columns}
+        pagination={false}
+        dataSource={list}
+        scroll={{ y: 550 }}
+        rowKey={record => record.ID}
+      />
     </div>
   );
 }

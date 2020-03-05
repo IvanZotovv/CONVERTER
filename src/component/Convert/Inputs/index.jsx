@@ -28,7 +28,7 @@ function Index(props) {
   useEffect(() => {
     setInputVal({
       leftInput: inputVal.leftInput,
-      rightInput: inputVal.rightInput * leftVal(left)
+      rightInput: (inputVal.leftInput * rightVal(right)) / leftVal(left)
     });
   }, [left]);
 
@@ -46,7 +46,7 @@ function Index(props) {
 
   return (
     <div className="converter">
-      <h2>Конвертация валют</h2>
+      <h2 className="converter-header">Конвертация валют</h2>
       <div className="converter-block">
         <div className="converter-block-head">
           <ValuteInput onChange={onChange('left')} />
@@ -54,13 +54,13 @@ function Index(props) {
         </div>
         <div className="converter-block-input">
           <Input
-            placeholder="Basic usage L"
+            placeholder="У меня есть"
             type="number"
             value={leftInput}
             onChange={getValueFromInput('left')}
           />
           <Input
-            placeholder="Basic usage R"
+            placeholder="Я получу"
             type="number"
             value={rightInput}
             onChange={getValueFromInput('right')}
@@ -71,23 +71,34 @@ function Index(props) {
         <div className="converter-info">
           <div className="converter-info-left">
             <p className="converter-info-left-from">
-              1 {left !== undefined ? charCodeValue(left) : 'RUR'} =&nbsp;
+              1{' '}
+              {left !== undefined || left.length > 0
+                ? charCodeValue(left)
+                : 'RUR'}{' '}
+              =&nbsp;
             </p>
             <p className="converter-info-left-to">
               {getExchengeDevide(left, right)}
               &nbsp;
-              {right !== undefined ? charCodeValue(right) : 'RUR'}
+              {right !== undefined || right.length > 0
+                ? charCodeValue(right)
+                : 'RUR'}
             </p>
           </div>
           <div className="converter-info-right">
             <p className="converter-info-right-from">
               1&nbsp;
-              {right !== undefined ? charCodeValue(right) : 'RUR'} =&nbsp;
+              {right !== undefined || right.length > 0
+                ? charCodeValue(right)
+                : 'RUR'}{' '}
+              =&nbsp;
             </p>
             <p className="converter-info-right-to">
               {getExchengeMultiply(left, right)}
               &nbsp;
-              {left !== undefined ? charCodeValue(left) : 'RUR'}
+              {left !== undefined || left.length > 0
+                ? charCodeValue(left)
+                : 'RUR'}
             </p>
           </div>
         </div>

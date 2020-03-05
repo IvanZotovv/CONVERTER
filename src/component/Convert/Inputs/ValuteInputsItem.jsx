@@ -1,31 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { getItem } from '../utils';
 
-export default function ValuteInputsItem({ item, handleChange, valut, flag }) {
-  if ([item].includes('HUF')) {
-    return (
-      <li
-        className="converter-from-valute-item"
-        key={item}
-        onClick={handleChange}
-      >
-        {flag === item ? (
-          <div className="converter-from-valute-item-block-able"></div>
-        ) : null}
-        {valut}
-      </li>
-    );
-  } else {
-    return (
-      <li
-        className="converter-from-valute-item"
-        key={item}
-        onClick={handleChange}
-      >
-        {flag === item ? (
-          <div className="converter-from-valute-item-block-able"></div>
-        ) : null}
-        {item}
-      </li>
-    );
-  }
+export default function ValuteInputsItem({
+  item,
+  onChange,
+  isOpenBlock,
+  flag,
+  obj,
+  list
+}) {
+  const showBlock =
+    flag === item ? (
+      <div className="converter-from-valute-item-block">{obj.Name}</div>
+    ) : null;
+
+  const handleChange = ({ currentTarget }, list) => {
+    isOpenBlock(currentTarget.textContent);
+    onChange(getItem(currentTarget.textContent, list));
+  };
+
+  return (
+    <li
+      className="converter-from-valute-item"
+      key={item}
+      onClick={event => handleChange(event, list)}
+    >
+      {showBlock}
+      {item}
+    </li>
+  );
 }

@@ -1,32 +1,15 @@
 import {
   GET_DATA,
-  ELECTED_ITEM,
   SELECT_FROM_LEFT_ITEM,
   SELECT_FROM_RIGHT_ITEM
 } from './actyonType';
+import { rubles } from './../component/Convert/utils';
 
 const initialState = {
   data: {},
-  elected: [],
   selectItem: {
-    leftBlock: [
-      {
-        CharCode: 'RUR',
-        Nominal: 100,
-        Name: 'Рубли',
-        ID: '1',
-        Value: 1
-      }
-    ],
-    rightBlock: [
-      {
-        CharCode: 'RUR',
-        Nominal: 100,
-        Name: 'Рубли',
-        ID: '1',
-        Value: 1
-      }
-    ]
+    leftBlock: rubles,
+    rightBlock: rubles
   }
 };
 
@@ -36,12 +19,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         data: action.payload
-      };
-    }
-    case ELECTED_ITEM: {
-      return {
-        ...state,
-        elected: state.elected.concat(action.payload)
       };
     }
     case SELECT_FROM_LEFT_ITEM: {
